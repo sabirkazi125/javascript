@@ -3,76 +3,122 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Indian Cricketers</title>
     <style>
       body {
-        background-color: gray;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
       }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      #p {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
       button {
-        background-color: lightblue;
-        font-size: 24px;
+        background-color: #1abc9c;
+        font-size: 20px;
         border: none;
-        border-radius: 6px;
+        border-radius: 10px;
         padding: 10px 20px;
-        color: blue;
+        color: white;
         cursor: pointer;
+        margin: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover:not(:disabled) {
+        background-color: #16a085;
       }
 
       button:disabled {
-        background-color: aquamarine;
+        background-color: #bdc3c7;
         cursor: not-allowed;
       }
     </style>
   </head>
   <body>
-    <h1 id="p">Names</h1>
-    <button onclick="sab.next()" id="next">next</button>
-    <button onclick="sab.res()">Reset</button>
+    <h1>Famous Indian Cricketers</h1>
+    <div id="p">Names</div>
+    <button id="next">Next</button>
+    <button id="reset">Reset</button>
+    <button id="back">Back</button>
     <script>
-      const x = [
-        "Sachin Tendulkar", // Legendary Batsman
-        "Virat Kohli", // Modern-day Great
-        "MS Dhoni", // Former Captain & Finisher
-        "Kapil Dev", // World Cup-winning Captain
-        "Rohit Sharma", // Hitman, Captain
-        "Sunil Gavaskar", // Legendary Opener
-        "Rahul Dravid", // The Wall of Indian Cricket
-        "Sourav Ganguly", // Former Captain
-        "Anil Kumble", // Spin Maestro
-        "Yuvraj Singh", // Six Sixes Hero
-        "Harbhajan Singh", // Off-spin Wizard
-        "Zaheer Khan", // Ace Fast Bowler
-        "Jasprit Bumrah", // Yorker Specialist
-        "Ravindra Jadeja", // All-rounder
-        "KL Rahul", // Stylish Batsman
-        "Shikhar Dhawan", // Gabbar of Cricket
-        "Irfan Pathan", // Swing Bowler
-        "Mohammed Shami", // Speedster
-        "Rishabh Pant", // Wicketkeeper-batsman
-        "VVS Laxman", // Miracle Maker
+      const players = [
+        "Sachin Tendulkar",
+        "Virat Kohli",
+        "MS Dhoni",
+        "Kapil Dev",
+        "Rohit Sharma",
+        "Sunil Gavaskar",
+        "Rahul Dravid",
+        "Sourav Ganguly",
+        "Anil Kumble",
+        "Yuvraj Singh",
+        "Harbhajan Singh",
+        "Zaheer Khan",
+        "Jasprit Bumrah",
+        "Ravindra Jadeja",
+        "KL Rahul",
+        "Shikhar Dhawan",
+        "Irfan Pathan",
+        "Mohammed Shami",
+        "Rishabh Pant",
+        "VVS Laxman",
       ];
 
-      function itrate() {
-        let i = 0;
-        return {
-          next: function () {
-            if (i < x.length) {
-              document.getElementById("p").innerHTML = `${i + 1} ` + x[i];
-              i++;
-            } else {
-              document.getElementById("p").innerHTML = "End of names";
-              document.getElementById("next").disabled = true;
-            }
-          },
-          res: function () {
-            i = 0;
-            document.getElementById("p").innerHTML = "Names";
-            document.getElementById("next").disabled = false;
-          },
-        };
+      let currentIndex = 0;
+
+      const elements = {
+        display: document.getElementById("p"),
+        nextButton: document.getElementById("next"),
+        resetButton: document.getElementById("reset"),
+        backButton: document.getElementById("back"),
+      };
+
+      function updateUI() {
+        elements.display.innerHTML =
+          currentIndex === 0
+            ? "Names"
+            : `<strong>${currentIndex}</strong>. ${players[currentIndex - 1]}`;
+        elements.backButton.disabled = currentIndex === 0;
+        elements.nextButton.disabled = currentIndex === players.length;
       }
 
-      const sab = itrate();
+      elements.nextButton.onclick = () => {
+        if (currentIndex < players.length) {
+          currentIndex++;
+          updateUI();
+        }
+      };
+
+      elements.backButton.onclick = () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateUI();
+        }
+      };
+
+      elements.resetButton.onclick = () => {
+        currentIndex = 0;
+        updateUI();
+      };
+
+      // Initialize UI
+      updateUI();
     </script>
   </body>
 </html>
