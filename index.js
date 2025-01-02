@@ -1,5 +1,5 @@
-let x = 3;
+function difference(a, b) {
+  return Math.abs(a - b);
+}
 
-x = Math.pow(x, 3);
-
-console.log(Math.min(5, 4, 3, 2, 1));
+console.log(difference(10, 5));
