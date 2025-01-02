@@ -1,5 +1,5 @@
-let x = 3.14;
+let x = 3;
 
-x = Math.round(x);
+x = Math.pow(x, 2);
 
 console.log(x);
