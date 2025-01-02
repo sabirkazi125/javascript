@@ -11,11 +11,50 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
       }
 
-      #player {
+      .box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 50%;
+      }
+
+      .player {
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 10px 0px;
         text-align: center;
-        background-color: ;
+        background-color: #34495e;
+        margin: 6px;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      h2 {
+        font-size: 24px;
+        color: #ecf0f1;
+        margin: 20px 0px 10px 0px;
+      }
+
+      .dise-con {
+        display: inline-flex;
+        margin: 10px 0px 0px 0px;
+        gap: 5px;
+      }
+
+      .dice {
+        height: 50px;
+        width: 50px;
+        font-size: 32px;
+        background-color: #1abc9c;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        line-height: 50px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 6px 0px;
+        border-radius: 8px;
       }
     </style>
   </head>
@@ -24,13 +63,19 @@
     <div class="box">
       <div class="player">
         <h2>Player 1</h2>
-        <div class="dice">-</div>
-        <div class="dice">-</div>
+        <div class="dise-con">
+          <div class="dice">-</div>
+          <div class="dice">-</div>
+        </div>
+        <div class="score">Score: <span>0</span></div>
       </div>
       <div class="player">
         <h2>Player 2</h2>
-        <div class="dice">-</div>
-        <div class="dice">-</div>
+        <div class="dise-con">
+          <div class="dice">-</div>
+          <div class="dice">-</div>
+        </div>
+        <div class="score">Score: <span>0</span></div>
       </div>
     </div>
     <button>Roll Dice</button>
