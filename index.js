@@ -2,4 +2,4 @@ function difference(a, b) {
   return Math.abs(a - b);
 }
 
-console.log(difference(10, 5));
+console.log(Math.random());
