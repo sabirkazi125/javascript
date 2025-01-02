@@ -8,28 +8,38 @@
       body {
         background-color: gray;
       }
+      button {
+        background-color: lightblue;
+        font-size: 24px;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        color: blue;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
-    <button onclick="lo.next()">Next</button>
-    <p id="p"></p>
+    <h1 id="p">Names</h1>
+    <button onclick="sab.next()">next</button>
     <script>
-      let x = ["a", "b", "c", "d", "e", "f", "g", "i", "j"];
-      function chalo() {
-        let nextIndex = 0;
+      const x = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
 
+      function itrate() {
+        let i = 0;
         return {
           next: function () {
-            if (nextIndex < x.length) {
-              document.getElementById("p").innerHTML = x[nextIndex];
-              nextIndex++;
+            if (i < x.length) {
+              document.getElementById("p").innerHTML = x[i];
+              i++;
             } else {
-              document.getElementById("p").innerHTML = "not of reach";
+              document.getElementById("p").innerHTML = "End of names";
             }
           },
         };
       }
-      const lo = chalo();
+
+      const sab = itrate();
     </script>
   </body>
 </html>
