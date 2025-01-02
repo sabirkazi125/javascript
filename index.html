@@ -17,24 +17,57 @@
         color: blue;
         cursor: pointer;
       }
+
+      button:disabled {
+        background-color: aquamarine;
+        cursor: not-allowed;
+      }
     </style>
   </head>
   <body>
     <h1 id="p">Names</h1>
-    <button onclick="sab.next()">next</button>
+    <button onclick="sab.next()" id="next">next</button>
+    <button onclick="sab.res()">Reset</button>
     <script>
-      const x = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
+      const x = [
+        "Sachin Tendulkar", // Legendary Batsman
+        "Virat Kohli", // Modern-day Great
+        "MS Dhoni", // Former Captain & Finisher
+        "Kapil Dev", // World Cup-winning Captain
+        "Rohit Sharma", // Hitman, Captain
+        "Sunil Gavaskar", // Legendary Opener
+        "Rahul Dravid", // The Wall of Indian Cricket
+        "Sourav Ganguly", // Former Captain
+        "Anil Kumble", // Spin Maestro
+        "Yuvraj Singh", // Six Sixes Hero
+        "Harbhajan Singh", // Off-spin Wizard
+        "Zaheer Khan", // Ace Fast Bowler
+        "Jasprit Bumrah", // Yorker Specialist
+        "Ravindra Jadeja", // All-rounder
+        "KL Rahul", // Stylish Batsman
+        "Shikhar Dhawan", // Gabbar of Cricket
+        "Irfan Pathan", // Swing Bowler
+        "Mohammed Shami", // Speedster
+        "Rishabh Pant", // Wicketkeeper-batsman
+        "VVS Laxman", // Miracle Maker
+      ];
 
       function itrate() {
         let i = 0;
         return {
           next: function () {
             if (i < x.length) {
-              document.getElementById("p").innerHTML = x[i];
+              document.getElementById("p").innerHTML = `${i + 1} ` + x[i];
               i++;
             } else {
               document.getElementById("p").innerHTML = "End of names";
+              document.getElementById("next").disabled = true;
             }
+          },
+          res: function () {
+            i = 0;
+            document.getElementById("p").innerHTML = "Names";
+            document.getElementById("next").disabled = false;
           },
         };
       }
