@@ -86,7 +86,7 @@
         background-color: #c0392b;
       }
 
-      .win {
+      #win {
         font-size: 32px;
         font-weight: bold;
         text-align: center;
@@ -129,33 +129,122 @@
         }
       }
 
-      .player:hover {
+      .h {
         transform: scale(1.05);
         background-color: #1abc9c;
+      }
+
+      .rotate {
+        animation: rotate 0.5s ease-out both;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(230deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
       }
     </style>
   </head>
   <body>
     <h1>Dice Roller Game</h1>
     <div class="box">
-      <div class="player">
+      <div class="player" id="player1">
         <h2>Player 1</h2>
         <div class="dise-con">
-          <div class="dice">-</div>
-          <div class="dice">-</div>
+          <div class="dice" id="d1">-</div>
+          <div class="dice" id="d2">-</div>
         </div>
-        <div class="score">Score: <span>0</span></div>
+        <div class="score">Score: <span id="sc1">0</span></div>
       </div>
-      <div class="player">
+      <div class="player" id="player2">
         <h2>Player 2</h2>
         <div class="dise-con">
-          <div class="dice">-</div>
-          <div class="dice">-</div>
+          <div class="dice" id="d3">-</div>
+          <div class="dice" id="d4">-</div>
         </div>
-        <div class="score">Score: <span>0</span></div>
+        <div class="score">Score: <span id="sc2">0</span></div>
       </div>
     </div>
-    <button>Roll Dice</button>
-    <h2 class="win">Player <span></span> Wins</h2>
+    <button onclick="run()" id="butt">Roll Dice</button>
+    <h2 id="win">Player <span id="pwin"></span> Wins</h2>
+    <h2 id="r">h</h2>
+    <script>
+      var a, b;
+      function chun() {
+        a = Math.floor(Math.random() * 6 + 1);
+        b = Math.floor(Math.random() * 6 + 1);
+      }
+
+      function add() {
+        if (count % 2 == 0) {
+          document.getElementById("player2").classList.remove("h");
+          scoreUpdate("1");
+        } else {
+          document.getElementById("player1").classList.remove("h");
+          scoreUpdate("2");
+        }
+      }
+
+      function scoreUpdate(p) {
+        const player = document.getElementById(`player${p}`);
+        if (player) {
+          player.classList.toggle("h");
+        }
+
+        if (p % 2 != 0) {
+          score1 += a + b;
+          document.getElementById("sc1").innerHTML = score1;
+          document.getElementById("d1").innerHTML = a;
+          document.getElementById("d2").innerHTML = b;
+          document.getElementById("d1").classList.add("rotate");
+          document.getElementById("d2").classList.add("rotate");
+          document.getElementById("d3").classList.remove("rotate");
+          document.getElementById("d4").classList.remove("rotate");
+
+          document.getElementById("d3").innerHTML = "-";
+          document.getElementById("d4").innerHTML = "-";
+        } else {
+          score2 += a + b;
+          document.getElementById("sc2").innerHTML = score2;
+          document.getElementById("d3").innerHTML = a;
+          document.getElementById("d4").innerHTML = b;
+          document.getElementById("d3").classList.add("rotate");
+          document.getElementById("d4").classList.add("rotate");
+          document.getElementById("d1").classList.remove("rotate");
+          document.getElementById("d2").classList.remove("rotate");
+
+          document.getElementById("d1").innerHTML = "-";
+          document.getElementById("d2").innerHTML = "-";
+        }
+      }
+
+      function check() {
+        if (score1 >= 100 || score2 >= 100) {
+          document.getElementById("butt").disabled = true;
+          if (score1 >= 100) {
+            document.getElementById("win").style.display = "block";
+            document.getElementById("pwin").innerHTML = 1;
+          } else {
+            document.getElementById("win").style.display = "block";
+            document.getElementById("pwin").innerHTML = 2;
+          }
+        }
+      }
+      var score1 = 0;
+      var score2 = 0;
+      var count = 0;
+      function run() {
+        chun();
+        add();
+        count++;
+        check();
+      }
+    </script>
   </body>
 </html>
